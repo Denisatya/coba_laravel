@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BlogFrontController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +15,30 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
+
+
+Route::get('/', function () {
+    return view('home');
+});
+
+//  Route::get('/blog', function () {
+//      return view('blog.index');
+//  });
+
+// Route::get('/read', function () {
+//     return view('/blog/read');
 // });
-Route::get('/', [HomeController::class, 'index']);
-Route::get('biodata', [HomeController::class,'biodata']);
+
+Route::get('/blog', [BlogFrontController::class,'tampil_biodata']);
+Route::get('/blog/detail/{id}',[BlogFrontController::class,'getread']);
+
+Route::get('/biodata', [HomeController::class,'biodata']);
+
+Route::get('/biodata/tambah',[HomeController::class,'tambah']);
+Route::post('/biodata/tambah_action',[HomeController::class,'tambah_action']);
+
+Route::get('/biodata/edit/{id}',[HomeController::class,'edit']);
+Route::post('/biodata/update/{id}',[HomeController::class,'update']);
+
+Route::get('/biodata/hapus/{id}', [HomeController::class,'destroy']);
 
